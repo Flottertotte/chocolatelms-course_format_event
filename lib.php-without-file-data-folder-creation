@@ -419,6 +419,7 @@ class format_event extends format_base {
         if($format_options['sendemailuponcourseupdate'] == 1){
             //change mail sent
             $format_event_config = get_config('format_event');
+            $mail_subject = $format_event_config->change_email_subject;
             $mail_content = $format_event_config->change_email_content;
 
             $mail_content = str_replace('[coursename]', $cur_course->fullname, $mail_content);
@@ -435,14 +436,8 @@ class format_event extends format_base {
             $context = context_course::instance($cur_course->id);
             $enrolled = get_enrolled_users($context, null, 0);
             $CFG->allowattachments = true;
-
-            if(!file_exists($CFG->dataroot.'/temp/files')){
-                mkdir($CFG->dataroot.'/temp/files');
-            }
             
             foreach ($enrolled as $enrol) {
-                $mail_subject = get_mail_subject($format_event_config->change_email_subject,$enrol,$USER);
-                $mail_subject = str_replace('[coursename]', $cur_course->fullname, $mail_subject);
                 $mail_content = str_replace('[firstname]', $enrol->firstname, $mail_content);
                 $mail_content = str_replace('[lastname]', $enrol->lastname, $mail_content);
                 
@@ -633,11 +628,10 @@ function get_ical_attachment($method, $course, $user, $locationstring='') {
 
         // FIXME: currently we are not sending updates if the times of the session are changed. This is not ideal!
         //if($method == 'update'){
-        //$SEQUENCE = time();
+        $SEQUENCE = time();
         //}else{
         //    ($method == 'cancel')?$SEQUENCE = 1:$SEQUENCE = 0;
         //}
-        ($method == 'cancel')?$SEQUENCE = 1:$SEQUENCE = 0;
         
         $SUMMARY     = ical_escape($course->fullname);
         $DESCRIPTION = ical_escape($course->summary, true);
@@ -723,12 +717,6 @@ EOF;
     //file_put_contents($tempfilepathname, $template);
     //return $tempfilename;
     return $template;
-}
-
-function get_mail_subject($subject,$user, $from){
-    $subject = str_replace(get_string('placeholder:firstname', 'format_event'), $user->firstname, $subject);
-    $subject = str_replace(get_string('placeholder:lastname', 'format_event'), $user->lastname, $subject);
-    return $subject;
 }
 /*
 function send_mail($message){

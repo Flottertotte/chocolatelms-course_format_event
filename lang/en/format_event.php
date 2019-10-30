@@ -69,4 +69,7 @@ $string['sendemailuponenrollment_desc'] = 'Send email upon enrollment';
 $string['sendemailuponunenrollment_desc'] = 'Send email upon unenrollment';
 $string['sendemailuponcourseupdate_desc'] = 'Send email upon course update';
 
+$string['placeholder:firstname'] = '[firstname]';
+$string['placeholder:lastname'] = '[lastname]';
+
 
