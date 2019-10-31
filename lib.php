@@ -623,7 +623,7 @@ function get_ical_attachment($method, $course, $user, $locationstring='') {
 
     // First, generate all the VEVENT blocks.
     $VEVENTS = '';
-        $DTSTAMP = ical_generate_timestamp($course->startdate);
+        $DTSTAMP = ical_generate_timestamp(time());
 
         // UIDs should be globally unique.
         //$UID = $DTSTAMP.'-'.substr(md5($CFG->siteidentifier.$course->id), -8).'@yunacademy';
