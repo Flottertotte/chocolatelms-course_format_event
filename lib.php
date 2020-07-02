@@ -416,7 +416,7 @@ class format_event extends format_base {
         $eventsret = external_api::clean_returnvalue(core_calendar_external::create_calendar_events_returns(), $eventsret);
         
         $format_options = $this->get_config_for_external();
-        if($data['sendemailuponcourseupdate'] == 1 && $format_options['sendemailuponcourseupdate'] == 0){
+        if($data['sendemailuponcourseupdate'] == 1 ){
             //change mail sent
             $format_event_config = get_config('format_event');
             $mail_content = $format_event_config->change_email_content;
