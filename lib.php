@@ -730,30 +730,4 @@ function get_mail_subject($subject,$user, $from){
     $subject = str_replace(get_string('placeholder:lastname', 'format_event'), $user->lastname, $subject);
     return $subject;
 }
-/*
-function send_mail($message){
-    global $CFG;
 
-    require_once($CFG->dirroot.'/course/format/event/classes/mail/PHPMailer.php');
-    require_once($CFG->dirroot.'/course/format/event/classes/mail/SMTP.php');
-
-    $mail = new PHPMailer();
-    $mail->SMTPDebug = 0;
-    $mail->isSMTP();
-    $mail->SMTPAuth = true;
-    $mail->Host = 'mail.emeneo.com';
-    $mail->SMTPSecure = 'ssl';
-    $mail->Port = 2525;
-    $mail->CharSet = 'UTF-8';
-    $mail->FromName = $message['fromusername'];
-    $mail->Username = 'chocolatelms@emeneo.com';
-    $mail->Password = 'Lecker123!';
-    $mail->From = $message['fromemail'];
-    $mail->isHTML(true);
-    $mail->addAddress($message['toemail']);
-    $mail->Subject = $message['subject'];
-    $mail->Body = $message['body'];
-    $mail->addAttachment($message['attachment']);
-    return $mail->send();
-}
-*/
