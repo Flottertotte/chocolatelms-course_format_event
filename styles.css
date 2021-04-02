@@ -39,6 +39,10 @@
     padding-bottom: 1rem !important;
 }
 
+.enrol_event_edit_course{
+    float: right;
+    margin-right: 1em;
+}
 /*
 .course-content ul li.section.main {
     margin-top: 1rem;

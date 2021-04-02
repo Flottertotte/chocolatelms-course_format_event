@@ -56,9 +56,12 @@ if (!empty($displaysection)) {
     $renderer->print_multiple_section_page($course, null, null, null, null);
 }
 
+$editurl=new moodle_url('/course/edit.php', array('id' => $course->id));
 $subTitle = '<div><span style="margin-right:15px;"><i class="icon fa fa-calendar"></i>'.date('Y-m-d',$course->startdate).'</span><span style="margin-right:15px;"><i class="icon fa fa-clock-o"></i>'.date('H:i',$course->startdate).'-'.date('H:i',$course->enddate).'</span><span><i class="icon fa fa-map-marker"></i>'.$course->location.'</span>';
+$button='<div class="enrol_event_edit_course"><a href="'.$editurl.'" class="btn btn-secondary" role="">'. get_string('edit').'</a></div>';
 echo '<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>';
 echo "<script>$('.page-header-headings').append('".$subTitle."')</script>";
+echo "<script>$('.mr-auto').after('".$button."')</script>";
 //echo $subTitle;
 // Include course format js module
 $PAGE->requires->js('/course/format/event/format.js');
