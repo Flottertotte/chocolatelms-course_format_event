@@ -416,7 +416,7 @@ class format_event extends format_base {
         $eventsret = external_api::clean_returnvalue(core_calendar_external::create_calendar_events_returns(), $eventsret);
         
         $format_options = $this->get_config_for_external();
-        if($data['sendemailuponcourseupdate'] == 1 ){
+        if($format_options['sendemailuponcourseupdate'] == 1){
             //change mail sent
             $format_event_config = get_config('format_event');
             $mail_content = $format_event_config->change_email_content;
@@ -430,7 +430,7 @@ class format_event extends format_base {
             $mail_content = str_replace('[description]', '', $mail_content);
             //$mail_content = str_replace('[description]', $cur_course->summary, $mail_content);
 
-            $mail_content.= '<br><a href="'.$CFG->wwwroot.'/course/view.php?id='.$cur_course->id.'">Link to '.$cur_course->fullname.'</a>';
+            $mail_content.= '<br><a href="'.$CFG->wwwroot.'/course/view.php?id='.$cur_course->id.'">更多信息/More info: '.$cur_course->fullname.'</a>';
 
             $context = context_course::instance($cur_course->id);
             $enrolled = get_enrolled_users($context, null, 0);
@@ -623,8 +623,8 @@ function get_ical_attachment($method, $course, $user, $locationstring='') {
 
     // First, generate all the VEVENT blocks.
     $VEVENTS = '';
+        //$DTSTAMP = ical_generate_timestamp($course->startdate);
         $DTSTAMP = ical_generate_timestamp(time());
-
         // UIDs should be globally unique.
         //$UID = $DTSTAMP.'-'.substr(md5($CFG->siteidentifier.$course->id), -8).'@yunacademy';
         $UID = substr(md5($CFG->siteidentifier.$course->id), -8).'@yunacademy';
@@ -730,4 +730,30 @@ function get_mail_subject($subject,$user, $from){
     $subject = str_replace(get_string('placeholder:lastname', 'format_event'), $user->lastname, $subject);
     return $subject;
 }
+/*
+function send_mail($message){
+    global $CFG;
 
+    require_once($CFG->dirroot.'/course/format/event/classes/mail/PHPMailer.php');
+    require_once($CFG->dirroot.'/course/format/event/classes/mail/SMTP.php');
+
+    $mail = new PHPMailer();
+    $mail->SMTPDebug = 0;
+    $mail->isSMTP();
+    $mail->SMTPAuth = true;
+    $mail->Host = 'mail.emeneo.com';
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port = 2525;
+    $mail->CharSet = 'UTF-8';
+    $mail->FromName = $message['fromusername'];
+    $mail->Username = 'chocolatelms@emeneo.com';
+    $mail->Password = 'Lecker123!';
+    $mail->From = $message['fromemail'];
+    $mail->isHTML(true);
+    $mail->addAddress($message['toemail']);
+    $mail->Subject = $message['subject'];
+    $mail->Body = $message['body'];
+    $mail->addAttachment($message['attachment']);
+    return $mail->send();
+}
+*/

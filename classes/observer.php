@@ -57,7 +57,7 @@ class format_event_observer {
                 $mail_content = str_replace('[description]', $course->summary, $mail_content);
                 $mail_content = str_replace('[firstname]', $user->firstname, $mail_content);
                 $mail_content = str_replace('[lastname]', $user->lastname, $mail_content);
-                $mail_content.= '<br><a href="'.$CFG->wwwroot.'/course/view.php?id='.$course->id.'">Link to '.$course->fullname.'</a>';
+                $mail_content.= '<br><a href="'.$CFG->wwwroot.'/course/view.php?id='.$course->id.'">更多信息/More info: '.$course->fullname.'</a>';
 
                 $attachname_file = $attachname_filename = '';
                 //if($format_event_config->email_attachment_setting == 2){
@@ -76,7 +76,6 @@ class format_event_observer {
                     $attachname = $course->fullname.'.ics';
                     $message->attachment = $file;
                     $message->attachname = $attachname;
-
                     $attachname_file = $CFG->dataroot.'/temp/files/'.md5(time().mt_rand(1,10000));
                     file_put_contents($attachname_file, $ics_content);
                     $attachname_filename = $attachname;
@@ -166,7 +165,7 @@ class format_event_observer {
             $mail_content = str_replace('[description]', $course->summary, $mail_content);
             $mail_content = str_replace('[firstname]', $user->firstname, $mail_content);
             $mail_content = str_replace('[lastname]', $user->lastname, $mail_content);
-            $mail_content.= '<br><a href="'.$CFG->wwwroot.'/course/view.php?id='.$course->id.'">Link to '.$course->fullname.'</a>';
+            $mail_content.= '<br><a href="'.$CFG->wwwroot.'/course/view.php?id='.$course->id.'">更多信息/More info: '.$course->fullname.'</a>';
 
             $CFG->allowattachments = true;
 
@@ -250,7 +249,7 @@ class format_event_observer {
             $mail_content = str_replace('[description]', $course->summary, $mail_content);
             $mail_content = str_replace('[firstname]', $user->firstname, $mail_content);
             $mail_content = str_replace('[lastname]', $user->lastname, $mail_content);
-            $mail_content.= '<br><a href="'.$CFG->wwwroot.'/course/view.php?id='.$course->id.'">Link to '.$course->fullname.'</a>';
+            $mail_content.= '<br><a href="'.$CFG->wwwroot.'/course/view.php?id='.$course->id.'">更多信息/More info: '.$course->fullname.'</a>';
 
             $CFG->allowattachments = true;
 
