@@ -88,7 +88,7 @@ class format_event_observer {
                 }else{
                     $messageid = email_to_user($user, $fromuser, $mail_subject, $mail_content,$mail_content);
                 }
-                unlink($attachname_file);
+                //unlink($attachname_file); //it will be deleted in mailqueue!
             }
         }
 
@@ -211,7 +211,8 @@ class format_event_observer {
             }else{
                 $messageid = email_to_user($user, $fromuser, $mail_subject, $mail_content,$mail_content);
             }
-            unlink($attachname_file);
+            //unlink($attachname_file); //It will be deleted in mailqueue!
+			
             //message_send($message);
         }
     }
@@ -292,7 +293,8 @@ class format_event_observer {
             }else{
               $messageid = email_to_user($user, $fromuser, $mail_subject, $mail_content,$mail_content);  
             }
-            unlink($attachname_file);
+            //unlink($attachname_file); It will be deleted in mailqueue!
+			
             //$messageid = message_send($message);
         }
     }
